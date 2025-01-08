@@ -104,3 +104,33 @@ function scrollActive() {
 }
 
 window.addEventListener('scroll', scrollActive);
+
+
+// Filter script for gallery items
+
+document.addEventListener("DOMContentLoaded", () => {
+  const filterButtons = document.querySelectorAll(".filter-button");
+  const projects = document.querySelectorAll(".project-box");
+
+  filterButtons.forEach(button => {
+    button.addEventListener("click", () => {
+      // Remove 'active' class from all buttons
+      filterButtons.forEach(btn => btn.classList.remove("active"));
+
+      // Add 'active' class to the clicked button
+      button.classList.add("active");
+
+      // Get the category of the clicked button
+      const category = button.getAttribute("data-category");
+
+      // Filter projects
+      projects.forEach(project => {
+        if (category === "all" || project.getAttribute("data-category") === category) {
+          project.style.display = "block";
+        } else {
+          project.style.display = "none";
+        }
+      });
+    });
+  });
+});
